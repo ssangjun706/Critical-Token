@@ -1,0 +1,9 @@
+# uv settings
+.venv
+.python-version
+pyproject.toml
+README.md
+main.py
+
+# data
+results/

@@ -1,0 +1,12 @@
+model: Qwen/Qwen2-Math-1.5B
+num_rollouts: 64
+batch_size: 32
+max_new_tokens: 2048
+gpu_memory_utilization: 0.95
+data_path: /home/work/minjaeoh/critical_token/dataset/hendrycks_math.json
+output_dir: /home/work/minjaeoh/critical_token/results
+use_wandb: True
+project_name: 'critical_token'
+wandb_api_key: 'cd978dfe2e8a1b04f8b8cec52d3409478042cc62'
+seed: 42
+resume: true
