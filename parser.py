@@ -153,3 +153,38 @@ def extract_latex_answer(text: str) -> str:
     result = strip_string(extracted_math)
     result = fix_all(result)
     return result
+
+
+def extract_boxed_answer(text: str) -> str | None:
+    if "oxed" in text:
+        ans = text.split("oxed")[-1]
+        if len(ans) == 0:
+            return ""
+        elif ans[0] == "{":
+            stack = 1
+            a = ""
+            for c in ans[1:]:
+                if c == "{":
+                    stack += 1
+                    a += c
+                elif c == "}":
+                    stack -= 1
+                    if stack == 0:
+                        break
+                    a += c
+                else:
+                    a += c
+        else:
+            a = ans.split("$")[0].strip()
+
+        extracted_math = a
+    else:
+        return None
+    
+    equals_match = re.search(r".*=\s*(.+)$", extracted_math)
+    if equals_match:
+        extracted_math = equals_match.group(1).strip()
+
+    result = strip_string(extracted_math)
+    result = fix_all(result)
+    return result
